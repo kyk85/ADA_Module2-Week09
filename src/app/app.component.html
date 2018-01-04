@@ -58,15 +58,58 @@
   <table class="table table-bordered table-responsive">
   <tr>
     <td>Name:</td>
-    <td>{{fullname}}</td>
+    <td>{{selectedItem.name}}</td>
   </tr>
   <tr>
     <td>Place:</td>
-    <td>{{fullplace}}</td>
+    <td>{{selectedItem.place}}</td>
   </tr>  
   <tr>
     <td>Description:</td>
-    <td>{{fulldesc}}</td>
+    <td>{{selectedItem.description}}</td>
   </tr>
+  </table>
+</div>
+
+<hr>
+
+<div>
+  <h1>Part 5: Detail Selected Item using Component</h1>
+  <app-detail-selected [newItem]="selectedItem"></app-detail-selected>
+</div>
+
+<hr>
+
+<div>
+  <h1>Part 6: User Service</h1>
+  <table class="table table-bordered">
+    <thead>
+      <td>Name</td>
+      <td>Alias</td>
+      <td>Email</td>
+    </thead>
+    <tr *ngFor="let user of users">
+      <td>{{user.name}}</td>
+      <td>{{user.alias}}</td>
+      <td>{{user.email}}</td>
+    </tr>
+  </table>
+</div>
+
+<hr>
+
+<div>
+  <h1>Part 6: User Service using HTTP</h1>
+  <table class="table table-bordered">
+    <thead>
+      <td>Name</td>
+      <td>Alias</td>
+      <td>Email</td>
+    </thead>
+    <tr *ngFor="let user of httpusers">
+      <td>{{user.name.title}} {{user.name.first}} {{user.name.last}}</td>
+      <td>{{user.location.city}}</td>
+      <td>{{user.email}}</td>
+    </tr>
   </table>
 </div>

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ItemService } from './item.service';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  //Dependency Injection
+  constructor(public itemServ : ItemService, public userServ : UserService) {
+
+  }
+
   title = 'YK app';
   number = 0;
   message = "";
@@ -13,11 +20,9 @@ export class AppComponent {
   fullplace="";
   fulldesc="";
     
-  items = [
-    {name:"YK",place:"ADA",completed:true},
-    {name:"Batman",place:"GOTHAM",completed:false},
-    {name:"Superman",place:"METROPOLIS",completed:true}    
-  ]
+  items = [];
+  users = [];
+  httpusers =[];
 
   newItem = {
     name:'',
@@ -63,10 +68,16 @@ export class AppComponent {
     }
   }
 
-  moreInfo(selectedItem){
-    this.fullname=selectedItem.name;
-    this.fullplace=selectedItem.place;
-    this.fulldesc=selectedItem.description;
+  moreInfo(item){
+    this.selectedItem=item;
     //alert("clicked")
+  }
+
+  ngOnInit() {
+    this.items=this.itemServ.getAllItem();
+    this.userServ.getAllHttpUsers().subscribe(data=>{
+      console.log(data);
+      this.httpusers=data.results
+    });
   }
 }
